@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\User;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -11,6 +11,6 @@ class LoginController extends Controller
     public function __invoke()
     {
 
-        return view('admin.user.login');
+        return view('login');
     }
 }

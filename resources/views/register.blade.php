@@ -2,7 +2,7 @@
 @section('content')
     <div class="container w-50">
         <h2>Register</h2>
-        <form method="POST">
+        <form action="{{route('admin.user.store')}}" method="POST">
             @csrf
             <div class="mb-3">
                 <label class="form-label">Name</label>
