@@ -17,6 +17,6 @@ class StoreController extends Controller
         User::firstOrCreate([
             'email' => $data['email']
         ], $data);
-        return view('welcome');
+        return redirect()->route('admin.user.index');
     }
 }

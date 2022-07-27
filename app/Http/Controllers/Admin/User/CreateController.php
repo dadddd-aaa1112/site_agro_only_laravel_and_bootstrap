@@ -6,12 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class CreateController extends Controller
 {
     public function __invoke()
     {
         $roles = User::getRoles();
-        $users = User::all();
-        return view('admin.user.index', compact('roles', 'users'));
+        return view('admin.user.create', compact('roles'));
     }
 }

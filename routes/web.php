@@ -17,12 +17,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', \App\Http\Controllers\Admin\Main\IndexController::class);
 
-    Route::group(['prefix' => 'user'], function () {
+    Route::group(['prefix' => 'users'], function () {
         Route::post('/', \App\Http\Controllers\Admin\User\StoreController::class)->name('admin.user.store');
         Route::get('/', \App\Http\Controllers\Admin\User\IndexController::class)->name('admin.user.index');
+        Route::get('/create', \App\Http\Controllers\Admin\User\CreateController::class)->name('admin.user.create');
+        Route::get('/{user}', \App\Http\Controllers\Admin\User\ShowController::class)->name('admin.user.show');
+        Route::get('/{user}/edit', \App\Http\Controllers\Admin\User\EditController::class)->name('admin.user.edit');
+        Route::patch('/{user}', \App\Http\Controllers\Admin\User\UpdateController::class)->name('admin.user.update');
+        Route::delete('{user}', \App\Http\Controllers\Admin\User\DestroyController::class)->name('admin.user.destroy');
     });
 
     Route::group(['prefix' => 'clients'], function() {
@@ -36,6 +42,9 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'cultures'], function() {
+        Route::get('/{culture}/restore', [\App\Http\Controllers\Admin\Culture\RestoreController::class, 'restoreTask'])->name('admin.culture.restore');
+        Route::get('/{culture}/force_delete', [\App\Http\Controllers\Admin\Culture\RestoreController::class, 'forceDelete'])->name('admin.culture.force_delete');
+        Route::get('/restore_all', [\App\Http\Controllers\Admin\Culture\RestoreController::class, 'restore_all'])->name('admin.culture.restore_all');
         Route::get('/', \App\Http\Controllers\Admin\Culture\IndexController::class)->name('admin.culture.index');
         Route::get('/create', \App\Http\Controllers\Admin\Culture\CreateController::class)->name('admin.culture.create');
         Route::post('/', \App\Http\Controllers\Admin\Culture\StoreController::class)->name('admin.culture.store');
@@ -43,6 +52,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::patch('/{culture}', \App\Http\Controllers\Admin\Culture\UpdateController::class)->name('admin.culture.update');
         Route::delete('/{culture}', \App\Http\Controllers\Admin\Culture\DestroyController::class)->name('admin.culture.destroy');
         Route::get('/{culture}/edit', \App\Http\Controllers\Admin\Culture\EditController::class)->name('admin.culture.edit');
+
+
     });
 
     Route::group(['prefix' => 'fertilizers'], function () {
