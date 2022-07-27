@@ -13,6 +13,6 @@ class Client extends Model
 
     protected $guarded = false;
     protected $table = 'clients';
-    public $dates = ['deleted_at'];
+    protected $dates = ['deleted_at'];
 
 }

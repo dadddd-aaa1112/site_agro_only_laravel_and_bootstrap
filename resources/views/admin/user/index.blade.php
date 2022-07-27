@@ -1,15 +1,21 @@
 @extends('admin.layouts.main')
 @section('content')
-    <div class="mb-3">
-        <a class="btn btn-outline-info" href="{{route('admin.user.create')}}">Создать</a>
+    <div class="mb-3 d-flex justify-content-between">
+        @if(request()->has('view_deleted'))
+            <a class="btn btn-outline-info" href="{{route('admin.user.index')}}">Посмотреть все</a>
+            <a class="btn btn-outline-info" href="{{route('admin.user.restore_all')}}">Восстановить все</a>
+        @else
+            <a class="btn btn-outline-info" href="{{route('admin.user.create')}}">Создать</a>
+            <a class="btn btn-outline-info" href="{{route('admin.user.index', ['view_deleted' => 'DeletedRecords'])}}">Посмотреть удаленные</a>
+        @endif
     </div>
     <table class="table table-info table-hover">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Наименование</th>
-            <th scope="col">Редактировать</th>
-            <th scope="col">Удалить</th>
+            <th scope="col">Действия</th>
+
 
         </tr>
         </thead>
@@ -19,8 +25,14 @@
             <tr>
                 <th scope="row">{{$user->id}}</th>
                 <td>{{$user->name}}</td>
-                <td><a href="{{route('admin.user.edit', $user->id)}}">Редактировать</a></td>
-                <td>@include('admin.user.delete.destroy')</td>
+
+                @if(request()->has('view_deleted'))
+                    <td><a href="{{route('admin.user.restore', $user->id)}}">Восстановить</a></td>
+                    <td><a href="{{route('admin.user.force_delete', $user->id)}}">Удалить навсегда</a></td>
+                @else
+                    <td><a href="{{route('admin.user.edit', $user->id)}}">Редактировать</a></td>
+                    <td>@include('admin.user.delete.destroy')</td>
+                @endif
             </tr>
         @endforeach
 

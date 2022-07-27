@@ -22,6 +22,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', \App\Http\Controllers\Admin\Main\IndexController::class);
 
     Route::group(['prefix' => 'users'], function () {
+        Route::get('/{user}/restore', [ \App\Http\Controllers\Admin\User\RestoreController::class, 'restoreData'])->name('admin.user.restore');
+        Route::get('/restore_all', [ \App\Http\Controllers\Admin\User\RestoreController::class, 'restoreAll'])->name('admin.user.restore_all');
+        Route::get('/{user}/force_delete', [ \App\Http\Controllers\Admin\User\RestoreController::class, 'forceDelete'])->name('admin.user.force_delete');
         Route::post('/', \App\Http\Controllers\Admin\User\StoreController::class)->name('admin.user.store');
         Route::get('/', \App\Http\Controllers\Admin\User\IndexController::class)->name('admin.user.index');
         Route::get('/create', \App\Http\Controllers\Admin\User\CreateController::class)->name('admin.user.create');
@@ -32,6 +35,9 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'clients'], function() {
+        Route::get('/{client}/restore' , [\App\Http\Controllers\Admin\Client\RestoreController::class, 'restoreData'])->name('admin.client.restore');
+        Route::get('/restore_all' ,  [\App\Http\Controllers\Admin\Client\RestoreController::class,'restoreAll'])->name('admin.client.restore_all');
+        Route::get('/{client}/force_delete', [\App\Http\Controllers\Admin\Client\RestoreController::class, 'forceDelete'])->name('admin.client.force_delete');
         Route::get('/', \App\Http\Controllers\Admin\Client\IndexController::class)->name('admin.client.index');
         Route::get('/create', \App\Http\Controllers\Admin\Client\CreateController::class)->name('admin.client.create');
         Route::post('/', \App\Http\Controllers\Admin\Client\StoreController::class)->name('admin.client.store');
@@ -57,6 +63,9 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'fertilizers'], function () {
+        Route::get('/{fertilizer}/restore',[\App\Http\Controllers\Admin\Fertilizer\RestoreController::class, 'restoreData'])->name('admin.fertilizer.restore');
+        Route::get('/restore_all',[\App\Http\Controllers\Admin\Fertilizer\RestoreController::class, 'restoreAll'])->name('admin.fertilizer.restore_all');
+        Route::get('/{fertilizer}/force_delete', [\App\Http\Controllers\Admin\Fertilizer\RestoreController::class, 'forceDelete'])->name('admin.fertilizer.force_delete');
         Route::get('/', \App\Http\Controllers\Admin\Fertilizer\IndexController::class)->name('admin.fertilizer.index');
         Route::get('/create', \App\Http\Controllers\Admin\Fertilizer\CreateController::class)->name('admin.fertilizer.create');
         Route::post('/', \App\Http\Controllers\Admin\Fertilizer\StoreController::class)->name('admin.fertilizer.store');

@@ -13,5 +13,5 @@ class Culture extends Model
 
     protected $table = 'cultures';
     protected $guarded = false;
-    public $dates = ['deleted_at'];
+    protected $dates = ['deleted_at'];
 }
