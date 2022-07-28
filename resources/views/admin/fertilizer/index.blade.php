@@ -1,5 +1,14 @@
 @extends('admin.layouts.main')
 @section('content')
+    <form class="" action="{{route('admin.fertilizer.index')}}" method="get">
+        <div class="mb-3 d-flex justify-content-between w-75">
+            <input name="search_field" @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}" @endif type="text" class="form-control" placeholder="Type something">
+            <select>
+                <option></option>
+            </select>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
     <div class="mb-3 d-flex justify-content-between w-50">
         @if(request()->has('view_deleted'))
             <a class="btn btn-outline-info" href="{{route('admin.fertilizer.index')}}">Посмотреть все</a>
@@ -41,4 +50,5 @@
 
         </tbody>
     </table>
+
 @endsection
