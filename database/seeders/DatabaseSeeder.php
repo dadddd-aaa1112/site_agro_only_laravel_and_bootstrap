@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Client;
+use App\Models\Culture;
+use App\Models\Fertilizer;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +18,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Culture::factory(20)->create();
+        Client::factory(50)->create();
+        Fertilizer::factory(100)->create();
+        User::factory(20)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
