@@ -23,4 +23,8 @@ class Fertilizer extends Model
     public function scopeFilter(Builder $builder, QueryFilter $filter){
         return $filter->apply($builder);
     }
+
+    public function cultures() {
+        return $this->belongsTo(Culture::class, 'culture_id', 'id');
+    }
 }

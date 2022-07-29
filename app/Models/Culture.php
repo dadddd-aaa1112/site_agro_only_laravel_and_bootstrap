@@ -14,4 +14,8 @@ class Culture extends Model
     protected $table = 'cultures';
     protected $guarded = false;
     protected $dates = ['deleted_at'];
+
+     public function fertilizers() {
+         return $this->hasMany(Fertilizer::class);
+     }
 }

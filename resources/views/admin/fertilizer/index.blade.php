@@ -2,12 +2,39 @@
 @section('content')
     <form class="" action="{{route('admin.fertilizer.index')}}" method="get">
         <div class="mb-3 d-flex justify-content-between w-75">
-            <input name="search_field" @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}" @endif type="text" class="form-control" placeholder="Type something">
-            <select>
-                <option></option>
-            </select>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <input class="w-25" name="search_field" @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}"
+                   @endif type="text" class="form-control" placeholder="Type something">
+            {{$normAzotMin}} - {{$normAzotMax}}
+            <input type="range" value="24" min="{{$normAzotMin}}" max="{{$normAzotMax}}" name="norm_azot">
         </div>
+
+        <div class="mb-3 d-flex justify-content-between w-75">
+            <select class="form-select" name="culture_search">
+                <option></option>
+                @foreach($cultures as $culture)
+                    <option
+                        value="{{$culture->id}}"
+                    @if(isset($_GET['culture_search']))
+                        {{ $_GET['culture_search'] == $culture->id ? 'selected' : ''}}
+                        @endif
+                    >{{$culture->id}}</option>
+                @endforeach
+            </select>
+
+            <select class="form-select" name="raion_search">
+                <option></option>
+                @foreach($raions as $raion)
+                    <option
+                        @if(isset($_GET['raion_search']))
+                            value="{{$raion->raion}}"
+                        @endif
+
+                    >{{$raion->raion}}</option>
+
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
     </form>
     <div class="mb-3 d-flex justify-content-between w-50">
         @if(request()->has('view_deleted'))
@@ -46,6 +73,7 @@
 
                 @endif
             </tr>
+
         @endforeach
 
         </tbody>
