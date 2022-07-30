@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Fertilizer;
 
 use App\Filters\FertilizerFilter;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Fertilizer\FilterRequest;
 use App\Models\Culture;
 use App\Models\Fertilizer;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
-    public function __invoke(Request $request, FertilizerFilter $filterRequest)
+    public function __invoke(Request $request, FertilizerFilter $filterRequest, FilterRequest $fromRequest)
     {
 
         $fertilizers = Fertilizer::with('cultures')->filter($filterRequest)->get();

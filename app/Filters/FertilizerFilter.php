@@ -12,7 +12,8 @@ class FertilizerFilter extends QueryFilter
     public function culture_search($id = null)
     {
         return $this->builder->when($id, function ($query) use ($id) {
-            $query->where('culture_id', $id);
+            $query->whereIn('culture_id', $id);
+
         });
     }
 
@@ -30,9 +31,8 @@ class FertilizerFilter extends QueryFilter
     {
         return $this->builder->when($search_string, function ($query) use ($search_string) {
             $query->where('title', 'LIKE', '%' . $search_string . '%');
-
 //            ->orWhere('description', 'LIKE', '%' . $search_string . '%')
-//            ->orWhere('target', 'LIKE', '%' . $search_string . '%');
+//           ->orWhere('target', 'LIKE', '%' . $search_string . '%');
         });
     }
 
