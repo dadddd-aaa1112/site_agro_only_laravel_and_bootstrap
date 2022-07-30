@@ -30,10 +30,9 @@
                                     <th scope="col">Нормы азота</th>
                                     <th scope="col">Нормы фосфора</th>
                                     <th scope="col">Нормы калия</th>
-                                    <th scope="col">culture_id</th>
                                     <th scope="col">Культура</th>
                                     <th scope="col">Район</th>
-                                    <th scope="col">Цена</th>
+                                    <th scope="col">Стоимость</th>
                                     <th scope="col">Описание</th>
                                     <th scope="col">Назначение</th>
 
@@ -49,7 +48,6 @@
                                         <td>{{$fertilizer->norm_azot}}</td>
                                         <td>{{$fertilizer->norm_fosfor}}</td>
                                         <td>{{$fertilizer->norm_kalii}}</td>
-                                        <td>{{$fertilizer->culture_id}}</td>
                                         <td>{{$fertilizer->cultures->title}}</td>
                                         <td>{{$fertilizer->raion}}</td>
                                         <td>{{$fertilizer->cost}}</td>
@@ -80,18 +78,136 @@
                             <form class="" action="{{route('admin.fertilizer.index')}}" method="get">
                                 <div class="d-flex flex-column">
 
-                                    <label class="form-label mb-n1">Поиск по наименованию</label>
+                                    <label class="form-label mb-n1">Поиск по наименованию,<br>
+                                        описанию,<br>
+                                        назначению
+                                    </label>
                                     <input class="mb-3 form-control" name="search_field"
                                            @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}"
                                            @endif type="text" class="form-control" placeholder="Введите наименование">
-                                    {{$normAzotMin}} - {{$normAzotMax}}
 
-                                    <input class="mb-3" type="range" value="24" min="{{$normAzotMin}}"
-                                           max="{{$normAzotMax}}"
-                                           name="norm_azot">
+
+{{--                                    <label class="form-label mb-n1">Нормы азота</label>--}}
+{{--                                    @if(isset($_GET['norm_azota_field']))--}}
+{{--                                        {{$normAzotMin}} - {{$_GET['norm_azota_field']}}--}}
+{{--                                    @else--}}
+{{--                                        {{$normAzotMin}} - {{$normAzotMax}}--}}
+{{--                                    @endif--}}
+{{--                                    <input--}}
+{{--                                        @if(isset($_GET['norm_azota_field'])) value="{{$_GET['norm_azota_field']}}"--}}
+{{--                                        @endif--}}
+{{--                                        type="range" value="{{$normAzotMax}}"--}}
+{{--                                        min="{{$normAzotMin}}"--}}
+{{--                                        max="{{$normAzotMax}}"--}}
+{{--                                        oninput="num.value = this.value"--}}
+{{--                                        name="norm_azota_field"--}}
+{{--                                    >--}}
+{{--                                    <output class="mb-3" id="num"></output>--}}
+
+                                    <div class="d-flex flex-column mb-3">
+                                        <label class="form-label mb-n1 text-center">Нормы азота</label>
+                                        <div class="d-flex justify-content-between">
+                                            <label class="form-label mb-n1 text-center">Min
+                                                <input class="mb-3 form-control " name="azot_min"
+                                                       @if(isset($_GET['azot_min']))
+                                                           value="{{$_GET['azot_min']}}"
+                                                       @else
+                                                           value="{{$normCostMin}}"
+                                                       @endif type="number" class="form-control"
+                                                       placeholder="Введите мин значение">
+                                            </label>
+
+                                            <label class="form-label mb-n1 text-center">Max
+                                                <input class="mb-3 form-control " name="azot_max"
+                                                       @if(isset($_GET['azot_max']))
+                                                           value="{{$_GET['azot_max']}}"
+                                                       @else
+                                                           value="{{$normAzotMax}}"
+                                                       @endif type="number" class="form-control"
+                                                       placeholder="Введите макс значение">
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-column mb-3">
+                                        <label class="form-label mb-n1 text-center">Нормы фосфора</label>
+                                        <div class="d-flex justify-content-between">
+                                            <label class="form-label mb-n1 text-center">Min
+                                                <input class="mb-3 form-control " name="fosfor_min"
+                                                       @if(isset($_GET['fosfor_min']))
+                                                           value="{{$_GET['fosfor_min']}}"
+                                                       @else
+                                                           value="{{$normFostorMin}}"
+                                                       @endif type="number" class="form-control"
+                                                       placeholder="Введите мин значение">
+                                            </label>
+
+                                            <label class="form-label mb-n1 text-center">Max
+                                                <input class="mb-3 form-control " name="fosfor_max"
+                                                       @if(isset($_GET['fosfor_max']))
+                                                           value="{{$_GET['fosfor_max']}}"
+                                                       @else
+                                                           value="{{$normFostorMax}}"
+                                                       @endif type="number" class="form-control"
+                                                       placeholder="Введите макс значение">
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-column mb-3">
+                                        <label class="form-label mb-n1 text-center">Нормы калия</label>
+                                        <div class="d-flex justify-content-between">
+                                            <label class="form-label mb-n1 text-center">Min
+                                                <input class="mb-3 form-control " name="kalii_min"
+                                                       @if(isset($_GET['kalii_min']))
+                                                           value="{{$_GET['kalii_min']}}"
+                                                       @else
+                                                           value="{{$normKaliiMin}}"
+                                                       @endif type="number" class="form-control"
+                                                       placeholder="Введите мин значение">
+                                            </label>
+
+                                            <label class="form-label mb-n1 text-center">Max
+                                                <input class="mb-3 form-control " name="kalii_max"
+                                                       @if(isset($_GET['kalii_max']))
+                                                           value="{{$_GET['kalii_max']}}"
+                                                       @else
+                                                           value="{{$normKaliiMax}}"
+                                                       @endif type="number" class="form-control"
+                                                       placeholder="Введите макс значение">
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="d-flex flex-column mb-3">
+                                    <label class="form-label mb-n1 text-center">Стоимость</label>
+                                    <div class="d-flex justify-content-between">
+                                        <label class="form-label mb-n1 text-center">Min
+                                        <input class="mb-3 form-control " name="cost_min"
+                                               @if(isset($_GET['cost_min']))
+                                                   value="{{$_GET['cost_min']}}"
+                                               @else
+                                                   value="{{$normCostMin}}"
+                                               @endif type="number" class="form-control"
+                                               placeholder="Введите мин значение">
+                                        </label>
+
+                                        <label class="form-label mb-n1 text-center">Max
+                                        <input class="mb-3 form-control " name="cost_max"
+                                               @if(isset($_GET['cost_max']))
+                                                   value="{{$_GET['cost_max']}}"
+                                               @else
+                                                   value="{{$normCostMax}}"
+                                               @endif type="number" class="form-control"
+                                               placeholder="Введите макс значение">
+                                        </label>
+                                    </div>
+                                    </div>
 
                                     <label class="form-label mb-n1">Культуры</label>
-                                    <select multiple class="form-select form-control mb-3 form-select-lg" name="culture_search[]">
+                                    <select multiple class="form-select form-control mb-3 form-select-lg"
+                                            name="culture_search[]">
                                         @foreach($cultures as $culture)
                                             <option
                                                 value="{{$culture->id}}"
@@ -105,13 +221,16 @@
                                     </select>
 
                                     <label class="form-label mb-n1">Район</label>
-                                    <select class="form-select form-control mb-3" name="raion_search">
-                                        <option></option>
+                                    <select multiple class="form-select form-control mb-3" name="raion_search[]">
                                         @foreach($raions as $raion)
                                             <option
-                                                @if(isset($_GET['raion_search']))
-                                                    value="{{$raion->raion}}"
+                                                value="{{$raion->id}}"
+                                            @if(isset($_GET['raion_search']))
+                                                {{ is_array($_GET['raion_search']) &&
+                                                in_array($raion->id, $_GET['raion_search'])
+                                                ? 'selected' : ''}}
                                                 @endif
+
                                             >{{$raion->raion}}</option>
                                         @endforeach
                                     </select>
@@ -123,4 +242,9 @@
                         </div>
                     @endif
             </div>
+            <script>
+                function updateTextInput(val) {
+                    document.getElementById('textInput').value = val;
+                }
+            </script>
 @endsection
