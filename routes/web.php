@@ -78,9 +78,9 @@ Route::group(['prefix' => 'admin'], function () {
 
 });
 
-Route::get('/user/login', \App\Http\Controllers\LoginController::class)->name('login');
+Route::get('/user/login', \App\Http\Controllers\LoginController::class)->name('user.login');
 Route::get('/user/register', \App\Http\Controllers\RegisterController::class)->name('user.register');
-
+Route::post('/admin', \App\Http\Controllers\AfterRegisterController::class)->name('admin');
 
 
 

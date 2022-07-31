@@ -1,34 +1,37 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container w-50">
-        <h2>Register</h2>
-        <form action="{{route('admin.user.store')}}" method="POST">
+    <div class="vh-100 d-flex justify-content-center align-items-center bg-info bg-gradient">
+        <form style="width: 25rem;" class="rounded p-5  bg-light " action="{{route('admin')}}" method="POST">
             @csrf
+            <h2 class="text-center">Регистрация</h2>
             <div class="mb-3">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" placeholder="name">
+                <label class="mb-n1">Имя</label>
+                <input type="text" class="form-control" name="name" placeholder="имя">
             </div>
             <div class="mb-3">
-                <label class="form-label">Email address</label>
+                <label class="mb-n1">Email</label>
                 <input type="email" class="form-control" name="email" placeholder="email">
             </div>
             <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" placeholder="password" name="password">
+                <label class="mb-n1">Пароль</label>
+                <input type="password" class="form-control" placeholder="пароль" name="password">
             </div>
             <div class="mb-3">
-                <label class="form-label">Password confirmed</label>
-                <input type="password" class="form-control" placeholder="password confirmed"
+                <label class="mb-n1">Подтверждение пароля</label>
+                <input type="password" class="form-control" placeholder="подтвердите пароль"
                        name="password_confirmation">
             </div>
             <div class="mb-3">
+                <label class="mb-n1">Выберите роль</label>
                 <select class="form-select" name="role">
                     @foreach($roles as $id => $role)
                         <option value="{{$id}}">{{$role}}</option>
                     @endforeach
                 </select>
             </div>
-            <button type="submit" class="btn btn-outline-success">Register</button>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-outline-info ">Зарегистрироваться</button>
+            </div>
         </form>
     </div>
 

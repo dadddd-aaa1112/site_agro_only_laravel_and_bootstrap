@@ -6,6 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" src="">
     @vite(['resources/js/app.js'])
 
     <title>{{ config('app.name', 'Laravel') }}</title>

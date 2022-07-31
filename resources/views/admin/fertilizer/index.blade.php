@@ -22,17 +22,29 @@
 
                         </div>
                         <div class="">
-                            <table class="table table-info table-hover table-sm ">
+                            <table class="table table-info table-hover table-sm table-striped">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Наименование</th>
+                                    @if(request()->has('view_deleted'))
+                                        <th scope="col">
+                                            Наименование
+                                        </th>
+                                    @else
+                                        <th scope="col">
+                                            @sortablelink('title', 'Наименование')
+                                        </th>
+                                    @endif
                                     <th scope="col">Нормы азота</th>
                                     <th scope="col">Нормы фосфора</th>
                                     <th scope="col">Нормы калия</th>
                                     <th scope="col">Культура</th>
                                     <th scope="col">Район</th>
-                                    <th scope="col">Стоимость</th>
+                                    @if(request()->has('view_deleted'))
+                                        <th scope="col">Стоимость</th>
+                                    @else
+                                        <th scope="col">@sortablelink('cost', 'Стоимость')</th>
+                                    @endif
                                     <th scope="col">Описание</th>
                                     <th scope="col">Назначение</th>
 
@@ -71,6 +83,12 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div>
+                            @if(request()->has('view_deleted'))
+                            @else
+                                {{$fertilizers->withQueryString()->links()}}
+                            @endif
+                        </div>
                     </div>
                     @if(request()->has('view_deleted'))
                     @else
@@ -87,22 +105,22 @@
                                            @endif type="text" class="form-control" placeholder="Введите наименование">
 
 
-{{--                                    <label class="form-label mb-n1">Нормы азота</label>--}}
-{{--                                    @if(isset($_GET['norm_azota_field']))--}}
-{{--                                        {{$normAzotMin}} - {{$_GET['norm_azota_field']}}--}}
-{{--                                    @else--}}
-{{--                                        {{$normAzotMin}} - {{$normAzotMax}}--}}
-{{--                                    @endif--}}
-{{--                                    <input--}}
-{{--                                        @if(isset($_GET['norm_azota_field'])) value="{{$_GET['norm_azota_field']}}"--}}
-{{--                                        @endif--}}
-{{--                                        type="range" value="{{$normAzotMax}}"--}}
-{{--                                        min="{{$normAzotMin}}"--}}
-{{--                                        max="{{$normAzotMax}}"--}}
-{{--                                        oninput="num.value = this.value"--}}
-{{--                                        name="norm_azota_field"--}}
-{{--                                    >--}}
-{{--                                    <output class="mb-3" id="num"></output>--}}
+                                    {{--                                    <label class="form-label mb-n1">Нормы азота</label>--}}
+                                    {{--                                    @if(isset($_GET['norm_azota_field']))--}}
+                                    {{--                                        {{$normAzotMin}} - {{$_GET['norm_azota_field']}}--}}
+                                    {{--                                    @else--}}
+                                    {{--                                        {{$normAzotMin}} - {{$normAzotMax}}--}}
+                                    {{--                                    @endif--}}
+                                    {{--                                    <input--}}
+                                    {{--                                        @if(isset($_GET['norm_azota_field'])) value="{{$_GET['norm_azota_field']}}"--}}
+                                    {{--                                        @endif--}}
+                                    {{--                                        type="range" value="{{$normAzotMax}}"--}}
+                                    {{--                                        min="{{$normAzotMin}}"--}}
+                                    {{--                                        max="{{$normAzotMax}}"--}}
+                                    {{--                                        oninput="num.value = this.value"--}}
+                                    {{--                                        name="norm_azota_field"--}}
+                                    {{--                                    >--}}
+                                    {{--                                    <output class="mb-3" id="num"></output>--}}
 
                                     <div class="d-flex flex-column mb-3">
                                         <label class="form-label mb-n1 text-center">Нормы азота</label>
@@ -112,7 +130,7 @@
                                                        @if(isset($_GET['azot_min']))
                                                            value="{{$_GET['azot_min']}}"
                                                        @else
-                                                           value="{{$normCostMin}}"
+                                                           value="{{$normAzotMin}}"
                                                        @endif type="number" class="form-control"
                                                        placeholder="Введите мин значение">
                                             </label>
@@ -181,28 +199,28 @@
 
 
                                     <div class="d-flex flex-column mb-3">
-                                    <label class="form-label mb-n1 text-center">Стоимость</label>
-                                    <div class="d-flex justify-content-between">
-                                        <label class="form-label mb-n1 text-center">Min
-                                        <input class="mb-3 form-control " name="cost_min"
-                                               @if(isset($_GET['cost_min']))
-                                                   value="{{$_GET['cost_min']}}"
-                                               @else
-                                                   value="{{$normCostMin}}"
-                                               @endif type="number" class="form-control"
-                                               placeholder="Введите мин значение">
-                                        </label>
+                                        <label class="form-label mb-n1 text-center">Стоимость</label>
+                                        <div class="d-flex justify-content-between">
+                                            <label class="form-label mb-n1 text-center">Min
+                                                <input class="mb-3 form-control " name="cost_min"
+                                                       @if(isset($_GET['cost_min']))
+                                                           value="{{$_GET['cost_min']}}"
+                                                       @else
+                                                           value="{{$normCostMin}}"
+                                                       @endif type="number" class="form-control"
+                                                       placeholder="Введите мин значение">
+                                            </label>
 
-                                        <label class="form-label mb-n1 text-center">Max
-                                        <input class="mb-3 form-control " name="cost_max"
-                                               @if(isset($_GET['cost_max']))
-                                                   value="{{$_GET['cost_max']}}"
-                                               @else
-                                                   value="{{$normCostMax}}"
-                                               @endif type="number" class="form-control"
-                                               placeholder="Введите макс значение">
-                                        </label>
-                                    </div>
+                                            <label class="form-label mb-n1 text-center">Max
+                                                <input class="mb-3 form-control " name="cost_max"
+                                                       @if(isset($_GET['cost_max']))
+                                                           value="{{$_GET['cost_max']}}"
+                                                       @else
+                                                           value="{{$normCostMax}}"
+                                                       @endif type="number" class="form-control"
+                                                       placeholder="Введите макс значение">
+                                            </label>
+                                        </div>
                                     </div>
 
                                     <label class="form-label mb-n1">Культуры</label>
@@ -234,17 +252,15 @@
                                             >{{$raion->raion}}</option>
                                         @endforeach
                                     </select>
-                                    <button type="submit" class="btn btn-primary w-50 mb-3">Фильтр</button>
+                                    <button type="submit" class="btn btn-primary w-50 mb-3">Установить фильтр</button>
 
                                 </div>
                             </form>
-
+                            <form class="" action="{{route('admin.fertilizer.index')}}" method="get">
+                                <button type="submit" class="btn btn-success w-50 mb-3">Сбросить все фильтры</button>
+                            </form>
                         </div>
                     @endif
             </div>
-            <script>
-                function updateTextInput(val) {
-                    document.getElementById('textInput').value = val;
-                }
-            </script>
+
 @endsection

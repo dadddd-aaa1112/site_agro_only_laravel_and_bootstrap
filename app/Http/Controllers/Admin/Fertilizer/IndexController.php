@@ -15,7 +15,10 @@ class IndexController extends Controller
     public function __invoke(Request $request, FertilizerFilter $filterRequest, FilterRequest $fromRequest)
     {
 
-        $fertilizers = Fertilizer::with('cultures')->filter($filterRequest)->get();
+        $fertilizers = Fertilizer::with('cultures')
+            ->filter($filterRequest)
+            ->sortable()
+            ->paginate(10);
         $normAzotMax = DB::table('fertilizers')->max('norm_azot');
         $normAzotMin = DB::table('fertilizers')->min('norm_azot');
         $normFostorMax = DB::table('fertilizers')->max('norm_fosfor');
@@ -27,6 +30,7 @@ class IndexController extends Controller
 
         $cultures = Culture::all();
         $raions = Fertilizer::all();
+
 
 
 
@@ -45,7 +49,8 @@ class IndexController extends Controller
             'normCostMax',
             'normCostMin',
             'cultures',
-            'raions'
+            'raions',
+
 
         ));
 
