@@ -22,7 +22,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', \App\Http\Controllers\Admin\Main\IndexController::class)->name('admin');
 
 
-    Route::group(['prefix' => 'users'], function () {
+    Route::group(['prefix' => 'users', 'middleware' => 'admin'], function () {
         Route::get('/{user}/restore', [ \App\Http\Controllers\Admin\User\RestoreController::class, 'restoreData'])->name('admin.user.restore');
         Route::get('/restore_all', [ \App\Http\Controllers\Admin\User\RestoreController::class, 'restoreAll'])->name('admin.user.restore_all');
         Route::get('/{user}/force_delete', [ \App\Http\Controllers\Admin\User\RestoreController::class, 'forceDelete'])->name('admin.user.force_delete');
@@ -35,7 +35,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         Route::delete('{user}', \App\Http\Controllers\Admin\User\DestroyController::class)->name('admin.user.destroy');
     });
 
-    Route::group(['prefix' => 'clients'], function() {
+    Route::group(['prefix' => 'clients', 'middleware' => 'admin'], function() {
         Route::get('/{client}/restore' , [\App\Http\Controllers\Admin\Client\RestoreController::class, 'restoreData'])->name('admin.client.restore');
         Route::get('/restore_all' ,  [\App\Http\Controllers\Admin\Client\RestoreController::class,'restoreAll'])->name('admin.client.restore_all');
         Route::get('/{client}/force_delete', [\App\Http\Controllers\Admin\Client\RestoreController::class, 'forceDelete'])->name('admin.client.force_delete');

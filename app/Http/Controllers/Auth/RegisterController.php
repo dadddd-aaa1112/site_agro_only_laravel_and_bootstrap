@@ -44,7 +44,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -54,13 +54,23 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required']
-        ]);
+        ],
+            $messages = [
+                'required' => 'Необходимо указать :attribute.',
+                'same'    => ':attribute и :other должны совпадать.',
+                'size'    => ':attribute должен быть равен :size.',
+                'between' => ':attribute должен быть между :min и :max.',
+                'in'      => ':attribute должен иметь один из следующих типов: :values',
+                'confirmed' => 'пароли не совпадают',
+                'unique' => ':attribute уже зарегистрирован'
+            ]
+        );
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\Models\User
      */
     protected function create(array $data)
@@ -72,4 +82,6 @@ class RegisterController extends Controller
             'role' => $data['role']
         ]);
     }
+
+
 }

@@ -31,4 +31,12 @@ class RegisterRequest extends FormRequest
             'role' => 'required'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Имя обязательно',
+            'email.required' => 'Email обязательно',
+        ];
+    }
 }
