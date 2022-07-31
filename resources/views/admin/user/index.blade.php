@@ -1,5 +1,6 @@
 @extends('admin.layouts.main')
 @section('content')
+    <h3>Пользователи</h3>
     <div class="mb-3 d-flex justify-content-between">
         @if(request()->has('view_deleted'))
             <a class="btn btn-outline-info" href="{{route('admin.user.index')}}">Посмотреть все</a>
@@ -24,7 +25,7 @@
         @foreach($users as $user)
             <tr>
                 <th scope="row">{{$user->id}}</th>
-                <td>{{$user->name}}</td>
+                <td><a href="{{route('admin.user.show', $user->id)}}">{{$user->name}}</a></td>
 
                 @if(request()->has('view_deleted'))
                     <td><a href="{{route('admin.user.restore', $user->id)}}">Восстановить</a></td>

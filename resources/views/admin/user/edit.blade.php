@@ -1,5 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
+
+    <h3>Пользователи</h3>
     <h3>Редактировать</h3>
     <div class="mb-3">
         <a href="{{route('admin.user.index')}}">На главную</a>
@@ -9,23 +11,23 @@
         @csrf
 
         <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input type="text" value="{{$user->name}}" name="name" class="form-control" placeholder="name">
+            <label class="form-label">Имя</label>
+            <input type="text" value="{{$user->name}}" name="name" class="form-control" placeholder="Имя">
             @error('name')
             {{$message}}
             @enderror
         </div>
 
         <div class="mb-3">
-            <label class="form-label">email</label>
-            <input type="email" value="{{$user->email}}" name="email" class="form-control" placeholder="email">
+            <label class="form-label">Email</label>
+            <input type="email" value="{{$user->email}}" name="email" class="form-control" placeholder="Email">
             @error('email')
             {{$message}}
             @enderror
         </div>
 
         <div class="mb-3">
-            <label class="form-label">role</label>
+            <label class="form-label">Роль</label>
             <select name="role" class="select-control">
                 @foreach($roles as $id => $role)
                     <option value="{{$id}}"

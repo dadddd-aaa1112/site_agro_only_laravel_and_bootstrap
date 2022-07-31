@@ -1,5 +1,6 @@
 @extends('admin.layouts.main')
 @section('content')
+    <h3>Удобрения</h3>
     <div class="d-flex ">
         @if(request()->has('view_deleted'))
             <div class="w-100">
@@ -28,7 +29,8 @@
                                     <th scope="col">#</th>
                                     @if(request()->has('view_deleted'))
                                         <th scope="col">
-                                            Наименование
+
+                                                Наименование
                                         </th>
                                     @else
                                         <th scope="col">
@@ -47,7 +49,7 @@
                                     @endif
                                     <th scope="col">Описание</th>
                                     <th scope="col">Назначение</th>
-
+                                    <th scope="col">Действия</th>
 
                                 </tr>
                                 </thead>
@@ -56,7 +58,10 @@
                                 @foreach($fertilizers as $fertilizer)
                                     <tr>
                                         <th scope="row">{{$fertilizer->id}}</th>
-                                        <td>{{$fertilizer->title}}</td>
+                                        <td>
+                                            <a href="{{route('admin.fertilizer.show', $fertilizer->id)}}">
+                                            {{$fertilizer->title}}</td>
+                                        </a>
                                         <td>{{$fertilizer->norm_azot}}</td>
                                         <td>{{$fertilizer->norm_fosfor}}</td>
                                         <td>{{$fertilizer->norm_kalii}}</td>

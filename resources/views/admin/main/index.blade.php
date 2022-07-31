@@ -4,27 +4,33 @@
 
     <!-- Content Wrapper. Contains page content -->
 
-        <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
 
-        <!-- /.content-header -->
+    <!-- /.content-header -->
 
-        <!-- Main content -->
+    <!-- Main content -->
+
         <section class="content">
             <div class="container-fluid">
+
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
+                    @if(auth()->user()->role === 1)
                     <div class="col-lg-3 col-6">
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>150</h3>
+                                <h3>{{$clients}}</h3>
 
-                                <p>New Orders</p>
+                                <p>Клиенты</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag"></i>
+                                <i>
+                                    <ion-icon class="ion " name="cash-outline"></ion-icon>
+                                </i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{route('admin.client.index')}}" class="small-box-footer">Подробнее <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -32,29 +38,36 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                                <h3>{{$users}}</h3>
 
-                                <p>Bounce Rate</p>
+                                <p>Пользователи</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-stats-bars"></i>
+                                <i>
+                                    <ion-icon class="ion " name="body-outline"></ion-icon>
+                                </i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{route('admin.user.index')}}" class="small-box-footer">Подробнее <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
+                    @endif
                     <!-- ./col -->
                     <div class="col-lg-3 col-6">
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>44</h3>
+                                <h3>{{$cultures}}</h3>
 
-                                <p>User Registrations</p>
+                                <p>Культуры</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-person-add"></i>
+                                <i>
+                                    <ion-icon class="ion " name="flower-outline"></ion-icon>
+                                </i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{route('admin.culture.index')}}" class="small-box-footer">Подробнее <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -62,14 +75,17 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>65</h3>
+                                <h3>{{$fertilizers}}</h3>
 
-                                <p>Unique Visitors</p>
+                                <p>Удобрения</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-pie-graph"></i>
+                                <i>
+                                    <ion-icon class="ion " name="bug-outline"></ion-icon>
+                                </i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{route('admin.fertilizer.index')}}" class="small-box-footer">Подробнее <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -89,13 +105,13 @@
         </section>
         <!-- /.content -->
 
-    <!-- /.content-wrapper -->
+        <!-- /.content-wrapper -->
 
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
 
-@endsection
+        @endsection

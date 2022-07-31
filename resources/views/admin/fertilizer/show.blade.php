@@ -1,7 +1,8 @@
 @extends('admin.layouts.main')
 @section('content')
+    <h3>Удобрения</h3>
     <div class="mb-3 d-flex justify-content-between">
-        <a class="btn btn-outline-warning" href="{{route('admin.fertilizer.edit', $fertilizer->id)}}">Edit</a>
+        <a class="btn btn-outline-warning" href="{{route('admin.fertilizer.edit', $fertilizer->id)}}">Редактировать</a>
         @include('admin.fertilizer.delete.destroy')
     </div>
     <table class="table table-info table-hover">
@@ -15,35 +16,35 @@
             <td>{{$fertilizer->title}}</td>
         </tr>
         <tr>
-            <th scope="col">norm_azot</th>
+            <th scope="col">Нормы азота</th>
             <td>{{$fertilizer->norm_azot}}</td>
         </tr>
         <tr>
-            <th scope="col">norm_fosfor</th>
+            <th scope="col">Нормы фосфора</th>
             <td>{{$fertilizer->norm_fosfor}}</td>
         </tr>
         <tr>
-            <th scope="col">norm_kalii</th>
+            <th scope="col">Нормы калия</th>
             <td>{{$fertilizer->norm_kalii}}</td>
         </tr>
         <tr>
-            <th scope="col">culture_id</th>
+            <th scope="col">Культуры</th>
             <td>{{$fertilizer->culture_id}}</td>
         </tr>
         <tr>
-            <th scope="col">raion</th>
+            <th scope="col">Район</th>
             <td>{{$fertilizer->raion}}</td>
         </tr>
         <tr>
-            <th scope="col">cost</th>
+            <th scope="col">Цена</th>
             <td>{{$fertilizer->cost}}</td>
         </tr>
         <tr>
-            <th scope="col">description</th>
+            <th scope="col">Описание</th>
             <td>{{$fertilizer->description}}</td>
         </tr>
         <tr>
-            <th scope="col">target</th>
+            <th scope="col">Назначение</th>
             <td>{{$fertilizer->target}}</td>
         </tr>
 

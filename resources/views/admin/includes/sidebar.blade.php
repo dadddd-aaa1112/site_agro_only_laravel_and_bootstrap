@@ -25,6 +25,15 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.user.index')}}" class="nav-link d-flex align-items-center">
+                        <ion-icon class="mr-2" name="people-outline"></ion-icon>
+                        <p>
+                            Пользователи
+                        </p>
+
+                    </a>
+                </li>
             @endif
             <li class="nav-item">
                 <a href="{{route('admin.culture.index')}}" class="nav-link d-flex align-items-center">
@@ -44,17 +53,9 @@
                 </p>
                 </a>
             </li>
-            @if(auth()->user()->role === 1)
-                <li class="nav-item">
-                    <a href="{{route('admin.user.index')}}" class="nav-link d-flex align-items-center">
-                    <ion-icon class="mr-2" name="people-outline"></ion-icon>
-                    <p>
-                        Пользователи
-                    </p>
 
-                    </a>
-                </li>
-            @endif
+
+
             </ul>
         <!-- /.sidebar-menu -->
 </nav>

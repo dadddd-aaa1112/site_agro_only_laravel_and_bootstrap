@@ -1,5 +1,6 @@
 @extends('admin.layouts.main')
 @section('content')
+    <h3>Клиенты</h3>
     <h3>Редактировать</h3>
     <div class="mb-3">
         <a href="{{route('admin.client.index')}}">На главную</a>

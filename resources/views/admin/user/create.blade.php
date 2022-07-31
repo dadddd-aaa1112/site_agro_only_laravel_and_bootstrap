@@ -1,5 +1,6 @@
 @extends('admin.layouts.main')
 @section('content')
+    <h3>Пользователи</h3>
     <div class="mb-3">
         <a class="btn btn-outline-secondary" href="{{route('admin.user.index')}}">На главную</a>
     </div>
@@ -7,41 +8,41 @@
         @csrf
         @method('post')
         <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input type="text" value="{{old('name')}}" name="name" class="form-control" placeholder="name">
+            <label class="form-label">Имя</label>
+            <input type="text" value="{{old('name')}}" name="name" class="form-control" placeholder="Имя">
             @error('name')
             {{$message}}
             @enderror
         </div>
 
         <div class="mb-3">
-            <label class="form-label">email</label>
-            <input type="email" value="{{old('email')}}" name="email" class="form-control" placeholder="email">
+            <label class="form-label">Email</label>
+            <input type="email" value="{{old('email')}}" name="email" class="form-control" placeholder="Email">
             @error('email')
             {{$message}}
             @enderror
         </div>
 
         <div class="mb-3">
-            <label class="form-label">password</label>
+            <label class="form-label">Пароль</label>
             <input type="password" value="{{old('password')}}" name="password" class="form-control"
-                   placeholder="password">
+                   placeholder="Пароль">
             @error('password')
             {{$message}}
             @enderror
         </div>
 
         <div class="mb-3">
-            <label class="form-label">password_confirmation</label>
+            <label class="form-label">Подтверждение пароля</label>
             <input type="password" value="{{old('password_confirmation')}}" name="password_confirmation"
-                   class="form-control" placeholder="password_confirmation">
+                   class="form-control" placeholder="Подтверждение пароля">
             @error('password_confirmation')
             {{$message}}
             @enderror
         </div>
 
         <div class="mb-3">
-            <label class="form-label">role</label>
+            <label class="form-label">Роль</label>
             <select name="role" class="select-control">
                 @foreach($roles as $id => $role)
                     <option value="{{$id}}"
@@ -55,6 +56,6 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Создать</button>
     </form>
 @endsection

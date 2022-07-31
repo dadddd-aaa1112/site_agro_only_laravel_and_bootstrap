@@ -1,6 +1,8 @@
 @extends('admin.layouts.main')
 @section('content')
+    <h3>Клиенты</h3>
     <div class="d-flex">
+
         @if(request()->has('view_deleted'))
             <div class="w-100">
                 @else

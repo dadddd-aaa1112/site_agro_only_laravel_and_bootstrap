@@ -1,5 +1,6 @@
 @extends('admin.layouts.main')
 @section('content')
+    <h3>Клиенты</h3>
     <div class="d-flex w-25 justify-content-around mb-3">
         <a class="btn btn-outline-warning" href="{{route('admin.client.edit', $client->id)}}">Редактировать</a>
 

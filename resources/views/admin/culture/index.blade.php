@@ -1,6 +1,6 @@
 @extends('admin.layouts.main')
 @section('content')
-
+    <h3>Культуры</h3>
     @if(request()->has('view_deleted'))
         <div class="mb-3 d-flex justify-content-between">
             <a class="btn btn-outline-warning"
@@ -23,7 +23,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Наименование</th>
-            <th scope="col">Action</th>
+            <th scope="col">Действия</th>
 
 
         </tr>
@@ -33,7 +33,11 @@
         @foreach($cultures as $culture)
             <tr>
                 <th scope="row">{{$culture->id}}</th>
-                <td>{{$culture->title}}</td>
+                <td>
+                    <a href="{{route('admin.culture.show', $culture->id)}}">
+                    {{$culture->title}}
+                    </a>
+                </td>
 
                 @if(request()->has('view_deleted'))
 
