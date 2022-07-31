@@ -18,8 +18,9 @@ Route::get('/', function () {
 });
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', \App\Http\Controllers\Admin\Main\IndexController::class);
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::get('/', \App\Http\Controllers\Admin\Main\IndexController::class)->name('admin');
+
 
     Route::group(['prefix' => 'users'], function () {
         Route::get('/{user}/restore', [ \App\Http\Controllers\Admin\User\RestoreController::class, 'restoreData'])->name('admin.user.restore');
@@ -77,11 +78,6 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
 });
-
-Route::get('/user/login', \App\Http\Controllers\LoginController::class)->name('user.login');
-Route::get('/user/register', \App\Http\Controllers\RegisterController::class)->name('user.register');
-Route::post('/admin', \App\Http\Controllers\AfterRegisterController::class)->name('admin');
-
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

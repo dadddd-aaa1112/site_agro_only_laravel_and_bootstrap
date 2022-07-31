@@ -4,8 +4,8 @@
 
 
 
-    <a href="index3.html" class="brand-link">
-        <span class="brand-text font-weight-light">Admin</span>
+    <a href="#" class="brand-link">
+        <span class="brand-text font-weight-light">Административная панель</span>
     </a>
 
     <div class="sidebar">
@@ -18,35 +18,39 @@
             <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
             <li class="nav-item">
-                <a href="{{route('admin.client.index')}}" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
-                    <p>
-                        Clients
+                <a href="{{route('admin.client.index')}}" class="nav-link d-flex align-items-center">
+
+                    <ion-icon class="mr-2" name="walk-outline"></ion-icon>
+                                       <p>
+                        Клиенты
                     </p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('admin.culture.index')}}" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
+                <a href="{{route('admin.culture.index')}}" class="nav-link d-flex align-items-center"">
+
+                    <ion-icon class="mr-2"  name="flower-outline"></ion-icon>
                     <p>
-                        Cultures
+                        Культуры
                     </p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('admin.fertilizer.index')}}" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
+                <a href="{{route('admin.fertilizer.index')}}" class="nav-link d-flex align-items-center"">
+                    <ion-icon class="mr-2"  name="bug-outline">  </ion-icon>
+
                     <p>
-                        Fertilizers
+                        Удобрения
                     </p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('admin.user.index')}}" class="nav-link">
-                    <i class="nav-icon far fa-image"></i>
+                <a href="{{route('admin.user.index')}}" class="nav-link d-flex align-items-center"">
+                    <ion-icon class="mr-2"  name="people-outline"></ion-icon>
                     <p>
-                        User
+                        Пользователи
                     </p>
+
                 </a>
             </li>
         </ul>

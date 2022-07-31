@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Dashboard</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -24,11 +26,6 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
-    <!-- Preloader -->
-
-
-    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
@@ -36,25 +33,38 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
+                <a href="{{route('admin')}}" class="nav-link">На главную</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
+
         </ul>
 
         <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto mr-3">
+            <!-- Navbar Search -->
+            <li class="nav-item">
+                <form class="" action="{{ route('logout')}} " method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger ">Выйти</button>
+                </form>
 
+            </li>
+
+
+        </ul>
     </nav>
+    <!-- Preloader -->
+
+
+
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
     @include('admin.includes.sidebar')
 </div>
 <div class="content-wrapper p-4">
-<!-- ./wrapper -->
-@yield('content')
-<!-- jQuery -->
+    <!-- ./wrapper -->
+    @yield('content')
+    <!-- jQuery -->
 </div>
 <!-- ./wrapper -->
 
@@ -76,7 +86,7 @@
 <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
 <script src="{{asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#summernote').summernote({
             toolbar: [
                 // [groupName, [list of button]]
