@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'email' => 'required|unique:users,email,'.$this->user->id,
-            'role' => 'required'
+            'role' => ''
         ];
     }
 }

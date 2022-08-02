@@ -34,16 +34,16 @@
                 <span class="text-danger">{{$message}}</span>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label class="mb-n1">Выберите роль</label>
-                <select class="form-select" name="role">
-                    <option value="1" {{old('role') == 1 ? 'selected' : ''}}>Администратор</option>
-                    <option value="2" {{old('role') == 2 ? 'selected' : ''}}>Пользователь</option>
-                </select>
-                @error('role')
-                <span class="text-danger">{{$message}}</span>
-                @enderror
-            </div>
+{{--            <div class="mb-3">--}}
+{{--                <label class="mb-n1">Выберите роль</label>--}}
+{{--                <select class="form-select" name="role">--}}
+{{--                    <option value="1" {{old('role') == 1 ? 'selected' : ''}}>Администратор</option>--}}
+{{--                    <option value="2" {{old('role') == 2 ? 'selected' : ''}}>Пользователь</option>--}}
+{{--                </select>--}}
+{{--                @error('role')--}}
+{{--                <span class="text-danger">{{$message}}</span>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-outline-info ">Зарегистрироваться</button>
             </div>
