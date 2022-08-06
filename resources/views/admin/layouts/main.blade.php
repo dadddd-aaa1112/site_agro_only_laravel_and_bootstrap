@@ -103,6 +103,11 @@
         bsCustomFileInput.init();
     });
 </script>
-
+<style>
+    .custom-file-input:lang(en)~.custom-file-label::after {
+        content: "...";
+        cursor: pointer;
+    }
+</style>
 </body>
 </html>

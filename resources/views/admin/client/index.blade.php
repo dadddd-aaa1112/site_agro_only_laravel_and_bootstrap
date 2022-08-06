@@ -80,6 +80,29 @@
                             @else
                                 <div class="w-25 mt-5 ml-3 mr-3">
 
+                                    @if(session('status'))
+                                        <div class="alert alert-default-info">
+                                            {{session('status')}}
+                                        </div>
+                                    @endif
+
+                                    <form class="mb-3" action="{{route('admin.client.excel')}}" method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">Загрузить Excel файл</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="client_excel">
+                                                    <label class="custom-file-label" ></label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span  class="input-group-text">Выбрать файл</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" >Загрузка</button>
+                                    </form>
+
 
                                     <form class="mb-3" action="{{route('admin.client.index')}}" method="get">
                                         <div class="d-flex flex-column">

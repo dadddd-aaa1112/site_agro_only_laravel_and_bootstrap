@@ -1,13 +1,39 @@
 @extends('admin.layouts.main')
 @section('content')
+    @if(session('status'))
+        <div class="alert alert-default-success">
+            {{session('status')}}
+        </div>
+    @endif
+
     <h3>Пользователи</h3>
     <div class="mb-3 d-flex justify-content-between">
         @if(request()->has('view_deleted'))
             <a class="btn btn-outline-info" href="{{route('admin.user.index')}}">Посмотреть все</a>
             <a class="btn btn-outline-info" href="{{route('admin.user.restore_all')}}">Восстановить все</a>
         @else
-            <a class="btn btn-outline-info" href="{{route('admin.user.create')}}">Создать</a>
-            <a class="btn btn-outline-info" href="{{route('admin.user.index', ['view_deleted' => 'DeletedRecords'])}}">Посмотреть удаленные</a>
+            <div class="d-flex flex-column">
+                <a class="btn btn-outline-info mb-3" href="{{route('admin.user.create')}}">Создать</a>
+                <a class="btn btn-outline-info"
+                   href="{{route('admin.user.index', ['view_deleted' => 'DeletedRecords'])}}">Посмотреть удаленные</a>
+            </div>
+            <form class="mb-3" action="{{route('admin.user.excel')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <label for="exampleInputFile">Загрузить Excel файл</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="user_excel">
+                            <label class="custom-file-label"></label>
+                        </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text">Выбрать файл</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">Загрузка</button>
+            </form>
+
         @endif
     </div>
     <table class="table table-info table-hover">

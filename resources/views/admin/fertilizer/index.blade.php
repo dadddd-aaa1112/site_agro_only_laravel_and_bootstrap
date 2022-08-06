@@ -1,5 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
+    @if(session('status'))
+      <div class="alert alert-default-success" >
+          {{session('status')}}
+      </div>
+    @endif
+
     <h3>Удобрения</h3>
     <div class="d-flex ">
         @if(request()->has('view_deleted'))
@@ -98,6 +104,24 @@
                     @if(request()->has('view_deleted'))
                     @else
                         <div class="w-25 ml-3 mt-5">
+
+                            <form class="mb-3" action="{{route('admin.fertilizer.excel')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Загрузить Excel файл</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="fertilizer_excel">
+                                            <label class="custom-file-label" ></label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span  class="input-group-text">Выбрать файл</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" >Загрузка</button>
+                            </form>
+
                             <form class="" action="{{route('admin.fertilizer.index')}}" method="get">
                                 <div class="d-flex flex-column">
 

@@ -1,5 +1,11 @@
 @extends('admin.layouts.main')
 @section('content')
+    @if(session('status'))
+        <div class="alert alert-default-dark">
+            {{session('status')}}
+        </div>
+    @endif
+
     <h3>Культуры</h3>
     @if(request()->has('view_deleted'))
         <div class="mb-3 d-flex justify-content-between">
@@ -13,7 +19,26 @@
             <a class="btn btn-outline-warning"
                href="{{route('admin.culture.index', ['view_deleted' => 'DeletedRecords'])}}">Просмотреть удаленные
             </a>
-        </div>
+                    </div>
+
+
+
+        <form class="mb-3" action="{{route('admin.culture.excel')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label for="exampleInputFile">Загрузить Excel файл</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="culture_excel">
+                        <label class="custom-file-label" ></label>
+                    </div>
+                    <div class="input-group-append">
+                        <span  class="input-group-text">Выбрать файл</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" >Загрузка</button>
+        </form>
     @endif
 
 
