@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
     @if(session('status'))
-        <div class="alert alert-default-dark">
+        <div class="alert alert-default-success">
             {{session('status')}}
         </div>
     @endif
@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" >Загрузка</button>
+            <button class="btn btn-outline-secondary"  type="submit">Импортировать</button>
         </form>
     @endif
 

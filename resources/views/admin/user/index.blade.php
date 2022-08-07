@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit">Загрузка</button>
+                <button class="btn btn-outline-secondary"  type="submit">Импортировать</button>
             </form>
 
         @endif

@@ -81,6 +81,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     });
 
+    Route::group(['prefix' => 'imports'], function () {
+        Route::get('/', \App\Http\Controllers\Admin\Import\IndexController::class)->name('admin.import.index');
+    });
+
 });
 
 

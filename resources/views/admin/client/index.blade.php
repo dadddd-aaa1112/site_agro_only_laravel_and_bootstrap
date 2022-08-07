@@ -1,5 +1,55 @@
 @extends('admin.layouts.main')
 @section('content')
+{{--    @if(session('status'))--}}
+{{--        @if(session('status') == 'finished')--}}
+{{--            <div class="alert alert-default-success">--}}
+{{--                Данные загружены успешно--}}
+{{--                {{session('status')->finished_at}}--}}
+{{--            </div>--}}
+{{--        @elseif(session('status') == 'failed')--}}
+{{--            <div class="alert alert-default-danger">--}}
+{{--                Данные не загружены--}}
+{{--                {{session('status')->output}}--}}
+{{--            </div>--}}
+{{--        @else--}}
+{{--            <div class="alert alert-default-info">--}}
+{{--                В процессе загрузки<br>--}}
+{{--                процесс: {{session('status')->progress_now}} %--}}
+{{--            </div>--}}
+{{--        @endif--}}
+{{--    @endif--}}
+
+
+@if(session('status'))
+    @if(session('status') == 'finished')
+        <div class="alert alert-default-success">
+            Данные загружены успешно
+
+        </div>
+    @elseif(session('status') == 'failed')
+        <div class="alert alert-default-danger">
+            Данные не загружены
+                  </div>
+    @else
+        <div class="alert alert-default-info">
+            В процессе загрузки<br>
+
+        </div>
+    @endif
+@endif
+
+
+    @if($errors->any())
+        <div class="alert alert-default-danger">
+        <h5 class="text-danger"> Ошибки при загрузке: </h5>
+        <ol>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ol>
+        </div>
+    @endif
+
     <h3>Клиенты</h3>
     <div class="d-flex">
 
@@ -16,7 +66,8 @@
                                 <a class="btn btn-outline-secondary" href="{{route('admin.client.restore_all')}}">Восстановить
                                     все</a>
                             @else
-                                <a class="btn btn-outline-secondary" href="{{route('admin.client.create')}}">Создать</a>
+                                <a class="btn btn-outline-secondary"
+                                   href="{{route('admin.client.create')}}">Создать</a>
                                 <a class="btn btn-outline-secondary"
                                    href="{{route('admin.client.index', ['view_deleted' => 'DeletedRecords'])}}">Посмотреть
                                     удаленные</a>
@@ -55,12 +106,14 @@
                                     <td>{{$client->cost_deliveries}}</td>
                                     <td>{{$client->region}}</td>
                                     @if(request()->has('view_deleted'))
-                                        <td><a href="{{route('admin.client.restore', $client->id)}}">Восстановить</a>
+                                        <td>
+                                            <a href="{{route('admin.client.restore', $client->id)}}">Восстановить</a>
                                         </td>
                                         <td><a href="{{route('admin.client.force_delete', $client->id)}}">Удалить
                                                 навсегда</a></td>
                                     @else
-                                        <td><a href="{{route('admin.client.edit', $client->id)}}">Редактировать</a></td>
+                                        <td><a href="{{route('admin.client.edit', $client->id)}}">Редактировать</a>
+                                        </td>
                                         <td>@include('admin.client.delete.destroy')</td>
                                     @endif
                                 </tr>
@@ -80,27 +133,23 @@
                             @else
                                 <div class="w-25 mt-5 ml-3 mr-3">
 
-                                    @if(session('status'))
-                                        <div class="alert alert-default-info">
-                                            {{session('status')}}
-                                        </div>
-                                    @endif
-
-                                    <form class="mb-3" action="{{route('admin.client.excel')}}" method="post" enctype="multipart/form-data">
+                                    <form class="mb-3" action="{{route('admin.client.excel')}}" method="post"
+                                          enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <label for="exampleInputFile">Загрузить Excel файл</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" name="client_excel">
-                                                    <label class="custom-file-label" ></label>
+                                                    <input type="file" class="custom-file-input"
+                                                           name="client_excel">
+                                                    <label class="custom-file-label"></label>
                                                 </div>
                                                 <div class="input-group-append">
-                                                    <span  class="input-group-text">Выбрать файл</span>
+                                                    <span class="input-group-text">Выбрать файл</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" >Загрузка</button>
+                                        <button class="btn btn-outline-secondary" type="submit">Импортировать</button>
                                     </form>
 
 
@@ -149,7 +198,8 @@
 
 
                                             <div class="d-flex flex-column mb-3">
-                                                <label class="form-label mb-n1 text-center">Стоимость поставки</label>
+                                                <label class="form-label mb-n1 text-center">Стоимость
+                                                    поставки</label>
                                                 <div class="d-flex justify-content-between">
                                                     <label class="form-label mb-n1 text-center">Min
                                                         <input type="number"
@@ -195,15 +245,16 @@
                                             </select>
 
 
-                                            <button type="submit" class="btn btn-primary w-50">Установить фильтр</button>
+                                            <button type="submit" class="btn btn-primary w-50">Установить фильтр
+                                            </button>
                                         </div>
                                     </form>
                                     <form action="{{route('admin.client.index')}}" method="get">
-                                        <button type="submit" class="btn btn-success w-50">Сбросить все фильтры</button>
+                                        <button type="submit" class="btn btn-success w-50">Сбросить все фильтры
+                                        </button>
                                     </form>
                                 </div>
                             @endif
                         </div>
-
 
 @endsection

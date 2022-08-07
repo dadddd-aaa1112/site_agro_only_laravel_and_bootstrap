@@ -119,7 +119,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" >Загрузка</button>
+                                <button class="btn btn-outline-secondary"  type="submit">Импортировать</button>
                             </form>
 
                             <form class="" action="{{route('admin.fertilizer.index')}}" method="get">
