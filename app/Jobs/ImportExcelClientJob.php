@@ -41,42 +41,24 @@ class ImportExcelClientJob implements ShouldQueue
      */
     public function handle()
     {
+        list($part1, $extendsFile) = explode('.', $this->filePath);
+        $extendsFile = strtoupper($extendsFile);
 
-        Excel::import(new ClientImport(), $this->filePath, 'local', \Maatwebsite\Excel\Excel::XLSX);
+        if ($extendsFile == 'XLSX') {
+            $readerType = \Maatwebsite\Excel\Excel::XLSX;
+        } else if ($extendsFile == 'XLS') {
+            $readerType = \Maatwebsite\Excel\Excel::XLS;
+        } else if ($extendsFile == 'CSV') {
+            $readerType = \Maatwebsite\Excel\Excel::CSV;
+        } else if ($extendsFile == 'XML')  {
+            $readerType = \Maatwebsite\Excel\Excel::XML;
+        } else if ($extendsFile == 'TSV') {
+            $readerType = \Maatwebsite\Excel\Excel::TSV;
+        } else  {
+            $readerType = \Maatwebsite\Excel\Excel::XLSX;
+        }
 
-
-
-//        try {
-//           Excel::import(new ClientImport(), $this->filePath, 'local', \Maatwebsite\Excel\Excel::XLSX);
-//
-//
-//                ImportStatusExcel::create([
-//                    'type' => 'Клиенты',
-//                    'status' => 'успешно загружено',
-//                    'user_id' => auth()->user()->id,
-//                ]);
-//
-//        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-//            $failures = $e->failures();
-//
-//            $errorStatus = array();
-//
-//            foreach ($failures as $failure) {
-//
-//                array_push($errorStatus, $failure->row());
-//                array_push($errorStatus, $failure->errors());
-//
-//            }
-//
-//            ImportStatusExcel::create([
-//                'type' => 'Клиенты',
-//                'status' => 'загрузка не выполнена',
-//                'commentarii' => serialize($errorStatus),
-//                'user_id' => auth()->user()->id,
-//            ]);
-//
-//
-//        }
+        Excel::import(new ClientImport(), $this->filePath, 'local', $readerType);
 
 
     }
