@@ -14,8 +14,8 @@ return new class extends Migration {
     {
         Schema::create('import_status_excels', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('status');
+            $table->unsignedBigInteger('type');
+            $table->unsignedBigInteger('status');
             $table->json('commentarii')->nullable();
             $table->foreignId('user_id')->index()->constrained('users');
             $table->timestamps();

@@ -10,8 +10,8 @@ class Service
     public function successImport()
     {
         ImportStatusExcel::create([
-            'type' => 'Удобрения',
-            'status' => 'успешно загружено',
+            'type' => ImportStatusExcel::TYPE_FERTILIZER,
+            'status' => ImportStatusExcel::STATUS_SUCCESS_IMPORT,
             'user_id' => auth()->user()->id,
         ]);
     }
@@ -19,8 +19,8 @@ class Service
     public function failedImport($errorRow, $errorMessage)
     {
         ImportStatusExcel::create([
-            'type' => 'Удобрения',
-            'status' => 'загрузка не выполнена',
+            'type' => ImportStatusExcel::TYPE_FERTILIZER,
+            'status' => ImportStatusExcel::STATUS_FAILED_IMPORT,
             'commentarii' => [
                 'row' => $errorRow,
                 'error' => ''

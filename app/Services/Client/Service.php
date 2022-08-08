@@ -9,8 +9,8 @@ class Service
     public function storeSuccess()
     {
         ImportStatusExcel::create([
-            'type' => 'Клиенты',
-            'status' => 'успешно загружено',
+            'type' => ImportStatusExcel::TYPE_CLIENT,
+            'status' => ImportStatusExcel::STATUS_SUCCESS_IMPORT,
             'user_id' => auth()->user()->id,
         ]);
     }
@@ -19,8 +19,8 @@ class Service
     public function storeFailed($errorRow, $errorMessage)
     {
         ImportStatusExcel::create([
-            'type' => 'Клиенты',
-            'status' => 'загрузка не выполнена',
+            'type' => ImportStatusExcel::TYPE_CLIENT,
+            'status' => ImportStatusExcel::STATUS_FAILED_IMPORT,
             'commentarii' => [
                 'row' => $errorRow,
                 'error' => ''
