@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Fertilizer;
 use Illuminate\Http\Request;
 
-class RestoreController extends Controller
+class RestoreController extends BaseController
 {
     public function restoreData(int $fertilizer)
     {

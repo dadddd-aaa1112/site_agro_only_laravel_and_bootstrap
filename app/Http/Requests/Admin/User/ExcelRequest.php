@@ -27,4 +27,11 @@ class ExcelRequest extends FormRequest
             'user_excel' => 'required|file'
         ];
     }
+
+    public function messages() {
+        return [
+            'user_excel.required' => 'Загрузите Excel файл',
+            'user_excel.file' => 'Загрузите Excel файл',
+        ];
+    }
 }

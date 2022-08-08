@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->string('type');
             $table->string('status');
-            $table->text('commentarii')->nullable();
+            $table->json('commentarii')->nullable();
             $table->foreignId('user_id')->index()->constrained('users');
             $table->timestamps();
         });

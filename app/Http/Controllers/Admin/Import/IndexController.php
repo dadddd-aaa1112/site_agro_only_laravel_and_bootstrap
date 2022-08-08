@@ -12,6 +12,9 @@ class IndexController extends Controller
     public function __invoke()
     {
         $imports = ImportStatusExcel::paginate(10);
-        return view('admin.import.index', compact('imports'));
+
+        return view('admin.import.index', compact(
+            'imports')
+        );
     }
 }

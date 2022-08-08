@@ -11,6 +11,9 @@ class ImportStatusExcel extends Model
 
     protected $guarded = false;
     protected $table = 'import_status_excels';
+    protected $casts = [
+        'commentarii' => 'array'
+    ];
 
     public function users()
     {

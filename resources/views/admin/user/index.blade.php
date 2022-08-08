@@ -1,8 +1,25 @@
 @extends('admin.layouts.main')
 @section('content')
     @if(session('status'))
-        <div class="alert alert-default-success">
-            {{session('status')}}
+        @if(session('status') == 'finished')
+            <div class="alert alert-default-success">
+                Данные загружены успешно
+            </div>
+        @else
+            <div class="alert alert-default-danger">
+                Данные не загружены
+            </div>
+        @endif
+    @endif
+
+    @if($errors->any())
+        <div class="alert alert-default-danger">
+            <h5 class="text-danger">Ошибки при загрузке: </h5>
+            <ol>
+                @foreach($errors->all() as $error)
+                    <ul>{{$error}}</ul>
+                @endforeach
+            </ol>
         </div>
     @endif
 
@@ -31,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-outline-secondary"  type="submit">Импортировать</button>
+                <button class="btn btn-outline-secondary" type="submit">Импортировать</button>
             </form>
 
         @endif
@@ -65,4 +82,5 @@
 
         </tbody>
     </table>
+    {{$users->links()}}
 @endsection

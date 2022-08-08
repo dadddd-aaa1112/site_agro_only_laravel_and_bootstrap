@@ -7,7 +7,7 @@ use App\Http\Requests\Admin\Culture\UpdateRequest;
 use App\Models\Culture;
 use Illuminate\Http\Request;
 
-class UpdateController extends Controller
+class UpdateController extends BaseController
 {
     public function __invoke(UpdateRequest $request, Culture $culture)
     {

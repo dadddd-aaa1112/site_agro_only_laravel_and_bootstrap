@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use Illuminate\Http\Request;
 
-class RestoreController extends Controller
+class RestoreController extends BaseController
 {
     public function restoreData(int $client) {
         Client::onlyTrashed()->find($client)->restore();

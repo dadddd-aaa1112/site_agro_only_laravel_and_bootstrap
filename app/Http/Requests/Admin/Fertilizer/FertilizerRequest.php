@@ -27,4 +27,11 @@ class FertilizerRequest extends FormRequest
             'fertilizer_excel' => 'required|file'
         ];
     }
+
+    public function messages() {
+        return [
+          'fertilizer_excel.required' => 'Загрузить файл Excel',
+          'fertilizer_excel.file' => 'Загрузить файл Excel',
+        ];
+    }
 }

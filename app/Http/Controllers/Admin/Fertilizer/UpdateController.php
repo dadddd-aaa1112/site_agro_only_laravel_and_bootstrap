@@ -7,7 +7,7 @@ use App\Http\Requests\Admin\Fertilizer\UpdateRequest;
 use App\Models\Fertilizer;
 use Illuminate\Http\Request;
 
-class UpdateController extends Controller
+class UpdateController extends BaseController
 {
     public function __invoke(UpdateRequest $request, Fertilizer $fertilizer)
     {

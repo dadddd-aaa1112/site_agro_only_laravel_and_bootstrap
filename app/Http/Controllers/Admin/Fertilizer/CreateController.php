@@ -7,7 +7,7 @@ use App\Models\Culture;
 use App\Models\Fertilizer;
 use Illuminate\Http\Request;
 
-class CreateController extends Controller
+class CreateController extends BaseController
 {
     public function __invoke()
     {

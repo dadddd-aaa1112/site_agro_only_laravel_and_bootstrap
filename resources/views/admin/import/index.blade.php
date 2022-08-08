@@ -8,9 +8,15 @@
             <th scope="col">#</th>
             <th scope="col">Импорт данных</th>
             <th scope="col">Статус</th>
-            <th scope="col" class="w-25">Комментарии к статусу</th>
-            <th scope="col">Пользователь ID</th>
-            <th scope="col">Пользователь</th>
+            <th scope="col">Ошибочные ряды <br>
+                в Excel файле
+            </th>
+            <th scope="col">Загружал<br>
+                пользователь ID
+            </th>
+            <th scope="col">Загружал<br>
+                пользователь
+            </th>
             <th scope="col">Дата создания статуса</th>
 
         </tr>
@@ -25,7 +31,15 @@
                     <th scope="row">{{$import->id}}</th>
                     <td>{{$import->type}}</td>
                     <td>{{$import->status}}</td>
-                    <td>{{$import->commentarii}}</td>
+                    <td>
+                        @if(isset($import->commentarii))
+                            <ul>
+                                @foreach($import->commentarii['row'] as $comment)
+                                    <li> {{$comment}}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </td>
                     <td>{{$import->user_id }}</td>
                     <td>{{$import->users->name ?? ''}}</td>
                     <td>{{ substr($import->created_at, 0, 11)}}</td>

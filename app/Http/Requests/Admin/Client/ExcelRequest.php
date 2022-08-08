@@ -27,4 +27,11 @@ class ExcelRequest extends FormRequest
             'client_excel' => 'required|file'
         ];
     }
+
+    public function messages() {
+        return [
+            'client_excel.required' => 'Необходимо загрузить Excel файл',
+            'client_excel.file' => 'Необходимо загрузить Excel файл'
+        ];
+    }
 }

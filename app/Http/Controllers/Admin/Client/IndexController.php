@@ -8,7 +8,7 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke(Request $request, ClientFilter $clientRequest)
     {

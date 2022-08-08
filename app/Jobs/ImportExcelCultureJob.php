@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Imports\CulutreImport;
+use App\Services\JobExtends\Service;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -31,8 +32,28 @@ class ImportExcelCultureJob implements ShouldQueue
      *
      * @return void
      */
+
+
     public function handle()
     {
-        Excel::import(new CulutreImport(), $this->filePath, 'local', \Maatwebsite\Excel\Excel::XLSX);
+        list($part1, $extendsFile) = explode('.', $this->filePath);
+        $extendsFile = strtoupper($extendsFile);
+
+        if ($extendsFile == 'XLSX') {
+            $readerType = \Maatwebsite\Excel\Excel::XLSX;
+        } else if ($extendsFile == 'XLS') {
+            $readerType = \Maatwebsite\Excel\Excel::XLS;
+        } else if ($extendsFile == 'CSV') {
+            $readerType = \Maatwebsite\Excel\Excel::CSV;
+        } else if ($extendsFile == 'XML')  {
+            $readerType = \Maatwebsite\Excel\Excel::XML;
+        } else if ($extendsFile == 'TSV') {
+            $readerType = \Maatwebsite\Excel\Excel::TSV;
+        } else  {
+            $readerType = \Maatwebsite\Excel\Excel::XLSX;
+        }
+
+
+        Excel::import(new CulutreImport(), $this->filePath, 'local', $readerType);
     }
 }

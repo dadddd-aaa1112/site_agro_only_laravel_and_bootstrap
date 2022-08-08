@@ -1,9 +1,26 @@
 @extends('admin.layouts.main')
 @section('content')
     @if(session('status'))
-      <div class="alert alert-default-success" >
-          {{session('status')}}
-      </div>
+        @if(session('status') == 'finished')
+            <div class="alert alert-default-success">
+                Данные загружены успешно
+            </div>
+        @else
+            <div class="alert alert-default-danger">
+                Данные не загружены
+            </div>
+        @endif
+    @endif
+
+    @if($errors->any())
+        <div class="alert alert-default-danger">
+            <h5 class="text-danger"> Ошибки при загрузке: </h5>
+            <ol>
+                @foreach($errors->all() as $error)
+                   <li> {{$error}}</li>
+                @endforeach
+            </ol>
+        </div>
     @endif
 
     <h3>Удобрения</h3>
@@ -36,7 +53,7 @@
                                     @if(request()->has('view_deleted'))
                                         <th scope="col">
 
-                                                Наименование
+                                            Наименование
                                         </th>
                                     @else
                                         <th scope="col">
@@ -105,21 +122,22 @@
                     @else
                         <div class="w-25 ml-3 mt-5">
 
-                            <form class="mb-3" action="{{route('admin.fertilizer.excel')}}" method="post" enctype="multipart/form-data">
+                            <form class="mb-3" action="{{route('admin.fertilizer.excel')}}" method="post"
+                                  enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleInputFile">Загрузить Excel файл</label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" name="fertilizer_excel">
-                                            <label class="custom-file-label" ></label>
+                                            <label class="custom-file-label"></label>
                                         </div>
                                         <div class="input-group-append">
-                                            <span  class="input-group-text">Выбрать файл</span>
+                                            <span class="input-group-text">Выбрать файл</span>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-outline-secondary"  type="submit">Импортировать</button>
+                                <button class="btn btn-outline-secondary" type="submit">Импортировать</button>
                             </form>
 
                             <form class="" action="{{route('admin.fertilizer.index')}}" method="get">

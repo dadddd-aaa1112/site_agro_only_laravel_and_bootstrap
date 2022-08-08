@@ -1,8 +1,25 @@
 @extends('admin.layouts.main')
 @section('content')
     @if(session('status'))
-        <div class="alert alert-default-success">
-            {{session('status')}}
+        @if(session('status') == 'finished')
+            <div class="alert alert-default-success">
+                Успешно загружено
+            </div>
+         @else
+            <div class="alert alert-default-danger">
+                {{session('status')}}
+            </div>
+        @endif
+    @endif
+
+    @if($errors->any())
+        <div class="alert alert-default-danger">
+            <h5 class="text-danger"> Ошибки при загрузке: </h5>
+            <ol>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ol>
         </div>
     @endif
 
@@ -19,25 +36,25 @@
             <a class="btn btn-outline-warning"
                href="{{route('admin.culture.index', ['view_deleted' => 'DeletedRecords'])}}">Просмотреть удаленные
             </a>
-                    </div>
+        </div>
 
 
 
-        <form class="mb-3" action="{{route('admin.culture.excel')}}" method="post" enctype="multipart/form-data">
+        <form class="mb-3 w-50" action="{{route('admin.culture.excel')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="exampleInputFile">Загрузить Excel файл</label>
                 <div class="input-group">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" name="culture_excel">
-                        <label class="custom-file-label" ></label>
+                        <label class="custom-file-label"></label>
                     </div>
                     <div class="input-group-append">
-                        <span  class="input-group-text">Выбрать файл</span>
+                        <span class="input-group-text">Выбрать файл</span>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-outline-secondary"  type="submit">Импортировать</button>
+            <button class="btn btn-outline-secondary" type="submit">Импортировать</button>
         </form>
     @endif
 
@@ -60,7 +77,7 @@
                 <th scope="row">{{$culture->id}}</th>
                 <td>
                     <a href="{{route('admin.culture.show', $culture->id)}}">
-                    {{$culture->title}}
+                        {{$culture->title}}
                     </a>
                 </td>
 
@@ -77,4 +94,5 @@
 
         </tbody>
     </table>
+    {{$cultures->links()}}
 @endsection

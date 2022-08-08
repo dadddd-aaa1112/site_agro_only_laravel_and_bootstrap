@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class RestoreController extends Controller
+class RestoreController extends BaseController
 {
     public function restoreData(int $user)
     {

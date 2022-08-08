@@ -28,4 +28,11 @@ class ExcelRequest extends FormRequest
 
         ];
     }
+
+    public function messages() {
+        return [
+            'culture_excel.required' => 'загрузите Excel файл',
+            'culture_excel.file' => 'необходимо загрузить Excel файл'
+        ];
+    }
 }

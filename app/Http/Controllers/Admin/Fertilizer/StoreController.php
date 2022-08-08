@@ -7,7 +7,7 @@ use App\Http\Requests\Admin\Fertilizer\StoreRequest;
 use App\Models\Fertilizer;
 use Illuminate\Http\Request;
 
-class StoreController extends Controller
+class StoreController extends BaseController
 {
     public function __invoke(StoreRequest $request)
     {

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Client;
 
+use App\Http\Requests\Import\Client\FailedRequest;
+use App\Http\Requests\Import\Client\SuccessRequest;
 use App\Imports\ClientImport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Client\ExcelRequest;
@@ -14,8 +16,10 @@ use Illuminate\Support\Facades\Storage;
 use Imtigger\LaravelJobStatus\JobStatus;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ExcelController extends Controller
+class ExcelController extends BaseController
 {
+
+
     public function __invoke(ExcelRequest $excelRequest)
     {
         $data = $excelRequest->validated();
@@ -23,6 +27,7 @@ class ExcelController extends Controller
 
         $filePath = Storage::disk('local')->put('/files', $file);
 
+        //imTigger laravel
 //        $job = new ImportExcelClientJob($filePath);
 //        $this->dispatch($job);
 //        $jobStatusId = $job->getJobStatusId();
@@ -34,11 +39,7 @@ class ExcelController extends Controller
         try {
             ImportExcelClientJob::dispatch($filePath);
 
-            ImportStatusExcel::create([
-                'type' => 'Клиенты',
-                'status' => 'успешно загружено',
-                'user_id' => auth()->user()->id,
-            ]);
+            $this->service->storeSuccess($data);
 
             return redirect()
                 ->route('admin.client.index')->with('status', 'finished');;
@@ -46,26 +47,22 @@ class ExcelController extends Controller
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
 
             $failures = $e->failures();
-            $errorStatus = array();
+            $errorRow = array();
+            $errorMessage = array();
 
             foreach ($failures as $failure) {
-                array_push($errorStatus, $failure->row());
-                array_push($errorStatus, $failure->errors());
+               // $errorStatus[$failure->row()] = $failure->errors();
+                array_push($errorRow, $failure->row());
+                array_push($errorMessage, $failure->errors());
             }
 
-            ImportStatusExcel::create([
-                'type' => 'Клиенты',
-                'status' => 'загрузка не выполнена',
-                'commentarii' => serialize($errorStatus),
-                'user_id' => auth()->user()->id,
-            ]);
+            $this->service->storeFailed(array_unique($errorRow), $errorMessage);
 
             ImportExcelClientJob::dispatch($filePath);
 
             return redirect()
                 ->route('admin.client.index')->with('status', 'failed');
         }
-
 
 
     }

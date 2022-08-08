@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke(Request $request)
     {
         $roles = User::getRoles();
-        $users = User::all();
+        $users = User::paginate(10);
 
         if ($request->has('view_deleted')) {
             $users = User::onlyTrashed()->get();

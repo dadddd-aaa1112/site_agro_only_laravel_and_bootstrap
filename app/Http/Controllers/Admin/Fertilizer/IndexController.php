@@ -10,7 +10,7 @@ use App\Models\Fertilizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke(Request $request, FertilizerFilter $filterRequest, FilterRequest $fromRequest)
     {
