@@ -26,7 +26,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Цена заказа</label>
-            <input value="{{old('cost_deliveries')}}" name="cost_deliveries" type='number' step='0.01'
+            <input value="{{old('cost_deliveries')}}" name="cost_deliveries" type='number' step='any'
                    class="form-control" placeholder="цена заказа">
 
             @error('cost_deliveries')

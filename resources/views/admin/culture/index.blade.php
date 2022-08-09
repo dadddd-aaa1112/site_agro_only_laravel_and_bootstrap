@@ -36,6 +36,9 @@
             <a class="btn btn-outline-warning"
                href="{{route('admin.culture.index', ['view_deleted' => 'DeletedRecords'])}}">Просмотреть удаленные
             </a>
+            <form action="{{route('admin.culture.export')}}" method="get">
+                <button type="submit" class="btn btn-outline-success">Сохранить данные в Excel</button>
+            </form>
         </div>
 
 
@@ -94,5 +97,8 @@
 
         </tbody>
     </table>
+    @if(request()->has('view_deleted'))
+    @else
     {{$cultures->links()}}
+    @endif
 @endsection

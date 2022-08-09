@@ -18,7 +18,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Нормы азота</label>
-                <input type="number" step="0.01" value="{{$fertilizer->norm_azot}}" name="norm_azot" class="form-control"
+                <input type="number" step="any" value="{{$fertilizer->norm_azot}}" name="norm_azot" class="form-control"
                        placeholder="Нормы азота">
                 @error('norm_azot')
                 {{$message}}
@@ -27,7 +27,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Нормы фосфора</label>
-                <input type="number" step="0.01" value="{{$fertilizer->norm_fosfor}}" name="norm_fosfor" class="form-control"
+                <input type="number" step="any" value="{{$fertilizer->norm_fosfor}}" name="norm_fosfor" class="form-control"
                        placeholder="Нормы фосфора">
                 @error('norm_fosfor')
                 {{$message}}
@@ -36,7 +36,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Нормы калия</label>
-                <input type="number" step="0.01" value="{{$fertilizer->norm_kalii}}" name="norm_kalii" class="form-control"
+                <input type="number" step="any" value="{{$fertilizer->norm_kalii}}" name="norm_kalii" class="form-control"
                        placeholder="Нормы калия">
                 @error('norm_kalii')
                 {{$message}}
@@ -71,7 +71,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Цена</label>
-                <input type="number" step="0.01" value="{{$fertilizer->cost}}" name="cost" class="form-control"
+                <input type="number" step="any" value="{{$fertilizer->cost}}" name="cost" class="form-control"
                        placeholder="Цена">
                 @error('cost')
                 {{$message}}

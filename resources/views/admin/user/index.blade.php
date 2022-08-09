@@ -34,6 +34,11 @@
                 <a class="btn btn-outline-info"
                    href="{{route('admin.user.index', ['view_deleted' => 'DeletedRecords'])}}">Посмотреть удаленные</a>
             </div>
+
+        <form action="{{route('admin.user.export')}}" method="get">
+            <button type="submit" class="btn btn-outline-success">Сохранить данные в Excel</button>
+        </form>
+
             <form class="mb-3" action="{{route('admin.user.excel')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
@@ -82,5 +87,8 @@
 
         </tbody>
     </table>
-    {{$users->links()}}
+    @if(request()->has('view_deleted'))
+    @else
+    {{ $users->links()}}
+    @endif
 @endsection

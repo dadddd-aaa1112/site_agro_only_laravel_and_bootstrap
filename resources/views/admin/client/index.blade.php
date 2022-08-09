@@ -1,52 +1,33 @@
 @extends('admin.layouts.main')
 @section('content')
-{{--    @if(session('status'))--}}
-{{--        @if(session('status') == 'finished')--}}
-{{--            <div class="alert alert-default-success">--}}
-{{--                Данные загружены успешно--}}
-{{--                {{session('status')->finished_at}}--}}
-{{--            </div>--}}
-{{--        @elseif(session('status') == 'failed')--}}
-{{--            <div class="alert alert-default-danger">--}}
-{{--                Данные не загружены--}}
-{{--                {{session('status')->output}}--}}
-{{--            </div>--}}
-{{--        @else--}}
-{{--            <div class="alert alert-default-info">--}}
-{{--                В процессе загрузки<br>--}}
-{{--                процесс: {{session('status')->progress_now}} %--}}
-{{--            </div>--}}
-{{--        @endif--}}
-{{--    @endif--}}
 
+    @if(session('status'))
+        @if(session('status') == 'finished')
+            <div class="alert alert-default-success">
+                Данные загружены успешно
 
-@if(session('status'))
-    @if(session('status') == 'finished')
-        <div class="alert alert-default-success">
-            Данные загружены успешно
+            </div>
+        @elseif(session('status') == 'failed')
+            <div class="alert alert-default-danger">
+                Данные не загружены
+            </div>
+        @else
+            <div class="alert alert-default-info">
+                В процессе загрузки<br>
 
-        </div>
-    @elseif(session('status') == 'failed')
-        <div class="alert alert-default-danger">
-            Данные не загружены
-                  </div>
-    @else
-        <div class="alert alert-default-info">
-            В процессе загрузки<br>
-
-        </div>
+            </div>
+        @endif
     @endif
-@endif
 
 
     @if($errors->any())
         <div class="alert alert-default-danger">
-        <h5 class="text-danger"> Ошибки при загрузке: </h5>
-        <ol>
-            @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ol>
+            <h5 class="text-danger"> Ошибки при загрузке: </h5>
+            <ol>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ol>
         </div>
     @endif
 
@@ -71,6 +52,12 @@
                                 <a class="btn btn-outline-secondary"
                                    href="{{route('admin.client.index', ['view_deleted' => 'DeletedRecords'])}}">Посмотреть
                                     удаленные</a>
+
+                                <form action="{{route('admin.client.export')}}" method="get">
+                                    <button type="submit" class="btn btn-outline-success">Сохранить данные в Excel
+                                    </button>
+                                </form>
+
                             @endif
 
                         </div>

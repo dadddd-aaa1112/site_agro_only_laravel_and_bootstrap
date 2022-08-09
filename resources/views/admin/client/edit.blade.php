@@ -18,7 +18,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Цена заказа</label>
-            <input value="{{$client->cost_deliveries}}" name="cost_deliveries" type='number' step='0.01' class="form-control" placeholder="цена заказа" >
+            <input value="{{$client->cost_deliveries}}" name="cost_deliveries" type='number' step='any' class="form-control" placeholder="цена заказа" >
         </div>
         <div class="mb-3">
             <label  class="form-label">Регион</label>

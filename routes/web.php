@@ -23,6 +23,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 
     Route::group(['prefix' => 'users', 'middleware' => 'admin'], function () {
+        Route::get('/excel_export', \App\Http\Controllers\Admin\User\ExportController::class)->name('admin.user.export');
         Route::post('/excel_import', \App\Http\Controllers\Admin\User\ExcelController::class)->name('admin.user.excel');
         Route::get('/{user}/restore', [ \App\Http\Controllers\Admin\User\RestoreController::class, 'restoreData'])->name('admin.user.restore');
         Route::get('/restore_all', [ \App\Http\Controllers\Admin\User\RestoreController::class, 'restoreAll'])->name('admin.user.restore_all');
@@ -37,6 +38,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     });
 
     Route::group(['prefix' => 'clients', 'middleware' => 'admin'], function() {
+        Route::get('/excel_export', \App\Http\Controllers\Admin\Client\ExportController::class)->name('admin.client.export');
         Route::post('/excel_import', \App\Http\Controllers\Admin\Client\ExcelController::class)->name('admin.client.excel');
         Route::get('/{client}/restore' , [\App\Http\Controllers\Admin\Client\RestoreController::class, 'restoreData'])->name('admin.client.restore');
         Route::get('/restore_all' ,  [\App\Http\Controllers\Admin\Client\RestoreController::class,'restoreAll'])->name('admin.client.restore_all');
@@ -51,6 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     });
 
     Route::group(['prefix' => 'cultures'], function() {
+        Route::get('/excel_export', \App\Http\Controllers\Admin\Culture\ExportController::class)->name('admin.culture.export');
         Route::post('/excel_import', \App\Http\Controllers\Admin\Culture\ExcelController::class)->name('admin.culture.excel');
         Route::get('/{culture}/restore', [\App\Http\Controllers\Admin\Culture\RestoreController::class, 'restoreTask'])->name('admin.culture.restore');
         Route::get('/{culture}/force_delete', [\App\Http\Controllers\Admin\Culture\RestoreController::class, 'forceDelete'])->name('admin.culture.force_delete');
@@ -67,6 +70,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     });
 
     Route::group(['prefix' => 'fertilizers'], function () {
+        Route::get('/excel_export', \App\Http\Controllers\Admin\Fertilizer\ExportController::class)->name('admin.fertilizer.export');
         Route::post('/excel_import', \App\Http\Controllers\Admin\Fertilizer\ExcelController::class)->name('admin.fertilizer.excel');
         Route::get('/{fertilizer}/restore',[\App\Http\Controllers\Admin\Fertilizer\RestoreController::class, 'restoreData'])->name('admin.fertilizer.restore');
         Route::get('/restore_all',[\App\Http\Controllers\Admin\Fertilizer\RestoreController::class, 'restoreAll'])->name('admin.fertilizer.restore_all');

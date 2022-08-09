@@ -42,6 +42,10 @@
                                 <a class="btn btn-outline-info"
                                    href="{{route('admin.fertilizer.index', ['view_deleted' => 'DeletedRecords'])}}">Посмотреть
                                     удаленные</a>
+
+                                <form action="{{route('admin.fertilizer.export')}}" method="get">
+                                    <button type="submit" class="btn btn-outline-success">Сохранить данные в Excel</button>
+                                </form>
                             @endif
 
                         </div>
