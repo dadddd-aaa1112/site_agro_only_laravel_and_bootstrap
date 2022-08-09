@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', \App\Http\Controllers\Admin\Main\IndexController::class)->name('admin');
 
 
+
     Route::group(['prefix' => 'users', 'middleware' => 'admin'], function () {
         Route::get('/excel_export', \App\Http\Controllers\Admin\User\ExportController::class)->name('admin.user.export');
         Route::post('/excel_import', \App\Http\Controllers\Admin\User\ExcelController::class)->name('admin.user.excel');
@@ -38,6 +39,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     });
 
     Route::group(['prefix' => 'clients', 'middleware' => 'admin'], function() {
+        Route::get('/document_dogovor/{id}', \App\Http\Controllers\Admin\Client\DogovorController::class)->name('admin.document.dogovor');
         Route::get('/excel_export', \App\Http\Controllers\Admin\Client\ExportController::class)->name('admin.client.export');
         Route::post('/excel_import', \App\Http\Controllers\Admin\Client\ExcelController::class)->name('admin.client.excel');
         Route::get('/{client}/restore' , [\App\Http\Controllers\Admin\Client\RestoreController::class, 'restoreData'])->name('admin.client.restore');

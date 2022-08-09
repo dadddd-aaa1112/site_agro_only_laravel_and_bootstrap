@@ -58,6 +58,9 @@
                                     </button>
                                 </form>
 
+
+
+
                             @endif
 
                         </div>
@@ -102,6 +105,9 @@
                                         <td><a href="{{route('admin.client.edit', $client->id)}}">Редактировать</a>
                                         </td>
                                         <td>@include('admin.client.delete.destroy')</td>
+                                        <td>
+                                            <a class="btn btn-outline-info" href="{{route('admin.document.dogovor', $client->id)}}">Сформировать бланк договора</a>
+                                        </td>
                                     @endif
                                 </tr>
                             @endforeach
